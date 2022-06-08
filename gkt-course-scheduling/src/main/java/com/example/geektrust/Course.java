@@ -11,18 +11,23 @@ public class Course {
 	private Integer maxEmployees;
 	private List<RegisterCourse> regCourses = new ArrayList<>();
 	private String courseId;
+	
+	void createCourse(String course_name, String instructor, String date, Integer
+	minEmployees, Integer maxEmployees){
+		this.coursename=course_name;
+		this.instructor=instructor;
+		this.date = date;
+		this.minEmployees = minEmployees;
+		this.maxEmployees = maxEmployees;
+	}
 
 	// Course(String course_name, String instructor, String date, Integer
 	// minEmployees, Integer maxEmployees)
 	Course(String fullCommand) {
 		try {
 			String[] tokens = fullCommand.split("\\s+");
-			this.coursename = tokens[1];
-			this.instructor = tokens[2];
 			DateValidator dateService = new DateValidator(tokens[3]);
-			this.date = tokens[3]; // after validation
-			this.minEmployees = Integer.parseInt(tokens[4]);
-			this.maxEmployees = Integer.parseInt(tokens[5]);
+			createCourse(tokens[1],tokens[2],tokens[3],Integer.parseInt(tokens[4]),Integer.parseInt(tokens[5]));
 			courseId = "OFFERING-" + this.coursename + "-" + this.instructor;
 			Courses.addCourse(courseId, this);
 			System.out.println(courseId);
